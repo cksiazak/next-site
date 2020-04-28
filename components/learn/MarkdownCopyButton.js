@@ -25,7 +25,7 @@ const MarkdownCopyButton = ({ md }) => {
           top: 0;
           right: 0;
           border-radius: 0px;
-          padding: 0.75rem 1rem;
+          padding: 0.5rem 1rem;
           border: 0px;
           background: #0070f3;
           color: white;
@@ -50,7 +50,7 @@ const MarkdownCopyButton = ({ md }) => {
 
         @media (max-width: 960px) {
           button {
-            padding: 0.5rem 0.75rem;
+            padding: 0.25rem 0.5rem;
           }
         }
       `}</style>
