@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/tag';
+import MarkdownCopyButton from './MarkdownCopyButton';
 
 const A = ({ children, ...props }) => (
   <a target="_blank" rel="noopener noreferrer" {...props}>
@@ -74,47 +75,55 @@ const Blockquote = ({ children }) => (
   </blockquote>
 );
 
-const Code = ({ children }) => (
-  <pre>
-    <code>{children}</code>
-    <style jsx>{`
-      pre {
-        background: #1d1f21;
-        color: #f8f8f2;
-        white-space: pre;
-        overflow: auto;
-        padding: 1.5rem;
-        margin: 40px 0;
-        border-radius: 5px;
-        -webkit-overflow-scrolling: touch;
-      }
-      pre code {
-        padding: 0;
-        border-radius: 0;
-      }
-      pre code::before {
-        content: '';
-      }
-      pre code::after {
-        content: '';
-      }
-      /* Allow selecting all text for easy copy-pasting.
-         Right now, only enable it for CSS / Markdown because
-         for JS code, you might not want to copy
-         all the lines in a snippet.
-
-         Workaround: For shell scripts,
-         - Use "shell" for one-liners to allow users to copy easily
-         - Use "bash" for multi-liners so they can select each line
-         */
-      :global(.language-css) pre,
-      :global(.language-shell) pre,
-      :global(.language-md) pre {
-        user-select: all;
-      }
-    `}</style>
-  </pre>
-);
+const Code = ({ children }) => {
+  return (
+    <div>
+      <MarkdownCopyButton md={children} />
+      <pre>
+        <code>{children}</code>
+      </pre>
+      <style jsx>{`
+        div {
+          position: relative;
+        }
+        pre {
+          background: #1d1f21;
+          color: #f8f8f2;
+          white-space: pre;
+          overflow: auto;
+          padding: 1.5rem;
+          margin: 40px 0;
+          border-radius: 5px;
+          -webkit-overflow-scrolling: touch;
+        }
+        pre code {
+          padding: 0;
+          border-radius: 0;
+        }
+        pre code::before {
+          content: '';
+        }
+        pre code::after {
+          content: '';
+        }
+        /* Allow selecting all text for easy copy-pasting.
+        Right now, only enable it for CSS / Markdown because
+        for JS code, you might not want to copy
+        all the lines in a snippet.
+        
+        Workaround: For shell scripts,
+        - Use "shell" for one-liners to allow users to copy easily
+        - Use "bash" for multi-liners so they can select each line
+        */
+        :global(.language-css) pre,
+        :global(.language-shell) pre,
+        :global(.language-md) pre {
+          user-select: all;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 const InlineCode = ({ children }) => (
   <code>
