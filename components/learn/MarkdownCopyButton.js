@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import mdToClipboard from '../../lib/mdToClipboard';
 
 const MarkdownCopyButton = ({ md }) => {
-  const [copyStatus, setCopyStatus] = useState('Copy');
-
   const copyHandler = () => {
     mdToClipboard(md);
-    setCopyStatus('Copied');
-    setTimeout(() => {
-      setCopyStatus('Copy');
-    }, 1000);
   };
-
   return (
-    <button
-      type="button"
-      onClick={copyHandler}
-      className={copyStatus === 'Copied' ? 'copy-active' : 'copy-inactive'}
-    >
-      {copyStatus}
+    <button type="button" onClick={copyHandler}>
+      Copy
       <style jsx>{`
         button {
           position: absolute;
@@ -29,22 +18,17 @@ const MarkdownCopyButton = ({ md }) => {
           border: 0px;
           background: #0070f3;
           color: white;
-          transition: 0.2s;
           cursor: pointer;
           border-radius: 0px 5px 0px 5px;
-          min-width: 5rem;
+          transition: 0.2s;
           user-select: none;
         }
 
+        button:hover {
+          background: rgb(18, 124, 247);
+        }
+
         button:active {
-          outline: none;
-        }
-
-        .copy-inactive:hover {
-          background: rgba(0, 118, 255, 0.9);
-        }
-
-        .copy-active {
           background: green;
         }
 
